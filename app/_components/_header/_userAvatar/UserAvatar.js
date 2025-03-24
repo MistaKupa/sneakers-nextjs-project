@@ -4,12 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { IoPersonOutline } from "react-icons/io5";
 import UserAvatarPopup from "./UserAvatarPopup";
-import { useSession } from "next-auth/react";
-import { useState } from "react";
+
+import { useUserProfile } from "@/hooks/useUSerProfile";
 import { AnimatePresence, motion } from "motion/react";
+import { useState } from "react";
 
 export default function UserAvatar() {
-  const { data: session } = useSession();
+  const session = useUserProfile();
 
   const userName = session?.user?.name || "Guest Guest";
   const userInitials = userName

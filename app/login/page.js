@@ -3,34 +3,26 @@
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 import { motion } from "motion/react";
 import { useState } from "react";
-import { setCookie } from "cookies-next/client";
+import { login } from "./actions";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const router = useRouter();
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage("");
 
-    const result = await signIn("credentials", {
-      email,
-      password,
-      redirect: false,
-    });
+    const result = await login(new FormData(e.target));
 
     if (result?.error) {
-      setErrorMessage("Invalid email or password. Please try again.");
-      return;
+      setErrorMessage(result.error);
     }
-    router.push("/main/site/women");
   };
 
   return (
@@ -101,6 +93,7 @@ export default function Login() {
                   value={email}
                   type="email"
                   id="email"
+                  name="email"
                   required
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your Email..."
@@ -116,6 +109,7 @@ export default function Login() {
                   value={password}
                   type="password"
                   id="password"
+                  name="password"
                   required
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Your password..."
@@ -126,7 +120,7 @@ export default function Login() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 1 }}
-              type="submit"
+              // formAction={login}
               className="w-full bg-newPrimary text-newWhite h-10 rounded-md"
             >
               Sign in

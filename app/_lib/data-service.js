@@ -1,6 +1,8 @@
-import { supabase } from "./supabase-server";
+import { createServerClientInstance } from "@/utils/supabase/server";
 
 export async function getMenProducts() {
+  const supabase = await createServerClientInstance();
+
   const { data, error } = await supabase
     .from("menSneakers")
     .select("id, title, description, price, discount, details, images");
@@ -14,6 +16,8 @@ export async function getMenProducts() {
 }
 
 export async function getProduct(id) {
+  const supabase = await createServerClientInstance();
+
   const { data, error } = await supabase
     .from("menSneakers")
     .select("*")
@@ -29,13 +33,20 @@ export async function getProduct(id) {
 }
 
 export async function getUserOrders(email) {
-  let { data: orders, error: ordersError } = await supabase
+  const supabase = await createServerClientInstance();
+
+  const { data, error } = await supabase.auth.getUser();
+
+  if (!data?.user?.email || error) throw new Error("User not logged in");
+
+  const userEmail = data.user.email;
+
+  const { data: orders, error: ordersError } = await supabase
     .from("orders")
     .select("*")
-    .eq("customer_email", email);
+    .eq("customer_email", userEmail);
 
   if (ordersError) {
-    console.error(error);
     throw new Error("User orders could not be loaded");
   }
 
@@ -43,6 +54,8 @@ export async function getUserOrders(email) {
 }
 
 export async function getOrderDetails(orderId) {
+  const supabase = await createServerClientInstance();
+
   let { data: orderItems, error: orderItemsError } = await supabase
     .from("order_items")
     .select("*")

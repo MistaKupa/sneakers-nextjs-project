@@ -1,20 +1,17 @@
-import { supabase } from "@/app/_lib/supabase-server";
+import { createServerClientInstance } from "@/utils/supabase/server";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
   try {
-    const { oldPassword, newPassword } = await request.json();
+    const supabase = await createServerClientInstance();
 
-    const { data: user, error: userError } = await supabase.auth.getUser();
+    const { data: user, error } = await supabase.auth.getUser();
 
-    console.log(user);
-
-    if (userError || !user) {
-      return NextResponse.json(
-        { success: false, error: "Unauthorized. Please log in again." },
-        { status: 401 }
-      );
+    if (error || !user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
+
+    const { oldPassword, newPassword } = await request.json();
     // Verify old password
     const { error: signInError } = await supabase.auth.signInWithPassword({
       email: user.user.email,
@@ -23,7 +20,7 @@ export async function POST(request) {
 
     if (signInError) {
       return NextResponse.json(
-        { success: false, error: "Old password incorrect" },
+        { success: false, error: "Old password is incorrect" },
         { status: 400 }
       );
     }

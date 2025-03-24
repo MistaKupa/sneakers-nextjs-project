@@ -1,12 +1,9 @@
-import { getServerSession } from "next-auth";
-import OrderCard from "./OrderCard";
 import { getUserOrders } from "@/app/_lib/data-service";
+import { useUserProfile } from "@/hooks/useUSerProfile";
+import OrderCard from "./OrderCard";
 
 export default async function AccountOrders() {
-  const session = await getServerSession();
-  const userEmail = session?.user?.email;
-
-  const orders = await getUserOrders(userEmail);
+  const orders = await getUserOrders();
 
   return (
     <div className="flex flex-col gap-10">

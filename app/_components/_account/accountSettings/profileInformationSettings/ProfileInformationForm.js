@@ -2,29 +2,58 @@
 
 import { useState } from "react";
 import ProfileInformationInput from "./ProfileInformationInput";
+import { updateProfileInfo } from "@/app/_lib/account-service";
+import { format } from "date-fns";
 
-export default function ProfileInformationForm() {
-  const [displayName, setDisplayName] = useState("Feri");
-  const [gender, setGender] = useState("Male");
-  const [birthDate, setBirthDate] = useState("15.12.1985");
+export default function ProfileInformationForm({ setIsOpen, profile }) {
+  const { display_name: displayName, gender, birth_date: birthDate } = profile;
+
+  const formatedBirthDateInput = format(new Date(birthDate), "yyyy-MM-dd");
+
+  const [newDisplayName, setNewDisplayName] = useState(
+    displayName || newDisplayName
+  );
+  const [newGender, setNewGender] = useState(gender || newGender);
+  const [newBirthDate, setNewBirthDate] = useState(birthDate || newBirthDate);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const success = await updateProfileInfo(
+      newBirthDate,
+      newGender,
+      newDisplayName
+    );
+
+    if (success) {
+      setNewDisplayName(newDisplayName);
+      setNewGender(newGender);
+      setNewBirthDate(newBirthDate);
+      setIsOpen(false);
+    }
+  };
 
   const handleCancelForm = (e) => {
     e.preventDefault();
-    setDisplayName("Feri");
-    setGender("Male");
-    setBirthDate();
+    setNewDisplayName(displayName);
+    setNewGender(gender);
+    setNewBirthDate(birthDate);
+    setIsOpen(false);
   };
 
   return (
-    <form className="w-72 flex flex-col items-center justify-center gap-3">
+    <form
+      onSubmit={handleSubmit}
+      className="w-72 flex flex-col items-center justify-center gap-3"
+    >
       {/*DisplayName Input*/}
       <div className="relative">
         <ProfileInformationInput
           inputName="Display name"
           type="text"
           placeHolder="Display name"
-          value={displayName}
-          onChange={(e) => setDisplayName(e.target.value)}
+          value={newDisplayName}
+          onChange={(e) => setNewDisplayName(e.target.value)}
         />
         <span className="absolute top-0.5 left-3 text-[10px] text-dark-400 font-medium">
           Display Name
@@ -38,8 +67,8 @@ export default function ProfileInformationForm() {
           inputType="select"
           type="text"
           placeHolder="Gender"
-          value={gender}
-          onChange={(e) => setGender(e.target.value)}
+          value={newGender}
+          onChange={(e) => setNewGender(e.target.value)}
         />
         <span className="absolute top-0.5 left-3 text-[10px]  text-dark-400 font-medium">
           Gender
@@ -52,8 +81,8 @@ export default function ProfileInformationForm() {
           inputName="Birth Date"
           type="date"
           placeHolder="BirthDate"
-          value={birthDate}
-          onChange={(e) => setBirthDate(e.target.value)}
+          value={newBirthDate}
+          onChange={(e) => setNewBirthDate(e.target.value)}
         />
         <span className="absolute top-0.5 left-3 text-[10px] text-dark-400 font-medium">
           Birth Date
@@ -71,7 +100,10 @@ export default function ProfileInformationForm() {
           </button>
         </div>
         <div className="w-full">
-          <button className="w-full h-10 rounded-md text-newWhite bg-newPrimary">
+          <button
+            type="submit"
+            className="w-full h-10 rounded-md text-newWhite bg-newPrimary"
+          >
             Save
           </button>
         </div>

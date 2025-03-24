@@ -13,7 +13,8 @@ import { useState } from "react";
 export default function PaymentForm({ totalPrice }) {
   const stripe = useStripe();
   const elements = useElements();
-  const { cart, setCart, checkoutProgress, setCheckoutProgress } = useCart();
+  const { cart, setCart, checkoutProgress, setCheckoutProgress, totalItems } =
+    useCart();
 
   const [email, setEmail] = useState("");
 
@@ -116,6 +117,7 @@ export default function PaymentForm({ totalPrice }) {
               },
               total_price: totalPrice / 100,
               paid: true,
+              products_total_quantity: totalItems,
               products: cart.map((product) => ({
                 productId: product.id,
                 productName: product.title,

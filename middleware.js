@@ -1,19 +1,18 @@
-// import { NextResponse } from "next/server";
+import { updateSession } from "@/utils/supabase/middleware";
 
-// export function middleware(request) {
-//   console.log(request);
-
-//   return NextResponse.redirect(new URL("/site/women", request.url));
-// }
-
-import { withAuth } from "next-auth/middleware";
-
-export default withAuth({
-  pages: {
-    signIn: "/login",
-  },
-});
+export async function middleware(request) {
+  return await updateSession(request);
+}
 
 export const config = {
-  matcher: ["/main/site/men", "/main/account", "/main/account/:path"],
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * Feel free to modify this pattern to include more paths.
+     */
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+  ],
 };

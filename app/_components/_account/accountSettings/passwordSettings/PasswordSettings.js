@@ -24,15 +24,15 @@ export default function PasswordSettings({}) {
       </div>
       {isOpen ? (
         <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "470px" }}
+          initial={{ opacity: 0, maxHeight: 0 }}
+          animate={{ opacity: 1, maxHeight: "470px" }}
           transition={{
             duration: 0.4,
             type: "spring",
             stiffness: 300,
             damping: 50,
           }}
-          className="w-full h-[470px] flex flex-col justify-center gap-5 items-center bg-dark-200 border-x border-b border-dark-300 px-56"
+          className="w-full h-[470px] flex flex-col justify-center gap-5 items-center bg-dark-200 border-x border-b border-dark-300 px-56 overflow-hidden"
         >
           <motion.span
             initial={{ opacity: 0 }}

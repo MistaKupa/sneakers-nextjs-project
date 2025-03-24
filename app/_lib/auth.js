@@ -1,6 +1,7 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import { supabase } from "./supabase-server";
+
+import { createServerClientInstance } from "@/utils/supabase/server";
 
 export const authConfig = {
   providers: [
@@ -19,6 +20,8 @@ export const authConfig = {
         },
       },
       async authorize(credentials) {
+        const supabase = await createServerClientInstance();
+
         const { email, password } = credentials;
         const { data, error } = await supabase.auth.signInWithPassword({
           email,
@@ -47,18 +50,18 @@ export const authConfig = {
     },
     async session({ session, token }) {
       session.user.id = token.id;
-
+      session.user.email = token.email;
       return session;
     },
   },
-  async redirect({ url, baseUrl }) {
-    if (url === `${baseUrl}/login`) return `${baseUrl}/main/site/women`;
+  // async redirect({ url, baseUrl }) {
+  //   if (url === `${baseUrl}/login`) return `${baseUrl}/main/site/women`;
 
-    if (url.startsWith("/")) {
-      return `${baseUrl}${url}`;
-    }
-    return baseUrl;
-  },
+  //   if (url.startsWith("/")) {
+  //     return `${baseUrl}${url}`;
+  //   }
+  //   return baseUrl;
+  // },
 
   pages: {
     signIn: "/login",

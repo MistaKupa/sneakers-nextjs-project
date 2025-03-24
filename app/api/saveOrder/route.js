@@ -18,6 +18,7 @@ export async function POST(request) {
           customer_adress: order.adress.street,
           customer_postal: order.adress.postal,
           customer_phone_number: order.adress.phone,
+          products_total_quantity: order.products_total_quantity,
           total_price: order.total_price,
           paid: order.paid,
         },
