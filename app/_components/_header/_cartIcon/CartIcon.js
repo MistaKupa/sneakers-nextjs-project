@@ -29,10 +29,10 @@ function Cart() {
       <div className="relative flex items-center justify-center">
         <Link className="flex items-center justify-center" href="/main/cart">
           <button onClick={() => setCheckoutProgress("in-cart")}>
-            <IoCartOutline size={28} className="text-dark-500" />
+            <IoCartOutline className="text-dark-500 size-5 sm:size-7" />
           </button>
         </Link>
-        <span className="absolute top-[-20%] right-[50%] translate-x-[100%] flex items-center justify-center font-bold text-xs text-dark-100 bg-newPrimary rounded-full w-6 h-4">
+        <span className="absolute top-[-20%] right-[50%] translate-x-[100%] flex items-center justify-center sm:font-bold text-xs text-dark-100 bg-newPrimary rounded-full w-4 h-3 sm:w-6 sm:h-4">
           {totalItems}
         </span>
 

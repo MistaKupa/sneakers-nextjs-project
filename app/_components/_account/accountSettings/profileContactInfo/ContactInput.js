@@ -1,8 +1,8 @@
 function ContactInput({ inputId, label, type, value, autoComplete, onChange }) {
   return (
-    <div className="relative">
+    <div className="w-full relative">
       <input
-        className="w-72 h-12 border border-dark-300 rounded-md p-3 outline-newPrimary"
+        className="w-full border border-dark-300 rounded-md p-3 outline-newPrimary"
         id={inputId}
         placeholder="Insert your email"
         type={type}

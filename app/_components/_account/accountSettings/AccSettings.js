@@ -32,9 +32,11 @@ export default async function AccSettings() {
   // }
 
   return (
-    <div className="flex flex-col gap-10">
-      <h3 className="text-dark-500 text-3xl font-semibold">Account Settings</h3>
-      <div className="flex flex-col justify-center gap-28">
+    <div className="w-full xl:w-5/6 flex flex-col items-center gap-10">
+      <h3 className="text-dark-500 text-3xl font-semibold place-self-start">
+        Account Settings
+      </h3>
+      <div className="w-full flex flex-col justify-center items-center gap-28">
         <ProfilePicture />
         <PasswordSettings />
         <ProfileInformation />

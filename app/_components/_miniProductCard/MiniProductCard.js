@@ -11,7 +11,7 @@ export default function MiniProductCard() {
 
   return (
     <>
-      {cart.map((product) => {
+      {cart.map((product, i) => {
         const productTotal = product.price * product.quantity;
 
         const discountedPrice = product.price * (product.discount / 100);
@@ -20,7 +20,7 @@ export default function MiniProductCard() {
 
         return (
           <div
-            key={product.id}
+            key={i}
             exit={{ opacity: 0, x: 150 }}
             transition={{ duration: 500, delay: 1 }}
             className="flex items-center gap-5 px-6 "
@@ -65,8 +65,17 @@ export default function MiniProductCard() {
                   )}
                 </div>
               </div>
+
+              <div className="flex gap-1 text-dark-400 text-sm">
+                <span>Size:</span>
+                <span>{product.selectedSize}</span>
+              </div>
               <div className="flex items-center justify-center">
-                <button onClick={() => removeFromCart(product.id)}>
+                <button
+                  onClick={() =>
+                    removeFromCart(product.id, product.selectedSize)
+                  }
+                >
                   <IoTrashOutline
                     size={20}
                     className="text-dark-400 hover:text-newPrimary transition-all duration-300 cursor-pointer"

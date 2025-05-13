@@ -4,14 +4,14 @@ import { getProduct } from "@/app/_lib/data-service";
 
 export default async function Page({ params }) {
   const routeParams = await params;
-  const product = await getProduct(routeParams.productId);
+  const { product, sneakerSizes } = await getProduct(routeParams.productId);
 
   const { images } = product;
 
   return (
-    <div className="grid grid-cols-2 gap-10">
+    <div className="flex flex-col gap-14 px-5 md:gap-20 lg:grid lg:grid-cols-2 lg:gap-20">
       <ProductImage product={product} />
-      <ProductDescription product={product} />
+      <ProductDescription product={product} sneakerSizes={sneakerSizes} />
     </div>
   );
 }

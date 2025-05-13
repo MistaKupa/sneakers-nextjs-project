@@ -31,7 +31,7 @@ export default function PasswordForm({ setIsOpen }) {
 
   return (
     <form
-      className="w-72 flex flex-col items-center justify-center gap-3"
+      className="w-3/4 md:w-2/4  flex flex-col items-center justify-center gap-3"
       onSubmit={handleSubmit}
     >
       <PasswordStrengthIndicator password={newPassword} />

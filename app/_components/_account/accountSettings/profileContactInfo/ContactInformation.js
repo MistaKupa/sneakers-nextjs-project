@@ -4,7 +4,7 @@ import { useUserProfile } from "@/hooks/useUSerProfile";
 import LoadingSpinner from "../../../loadingspinner/LoadingSpinner";
 import { motion, AnimatePresence } from "motion/react";
 import ContactEmailForm from "./ContactEmailForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ContactInformation() {
   const { profile, isLoading, error } = useUserProfile();
@@ -12,9 +12,21 @@ export default function ContactInformation() {
   const [isEmailOpen, setIsEmailOpen] = useState(false);
   const [isPhoneOpen, setIsPhoneOpen] = useState(false);
 
+  useEffect(() => {
+    if (isEmailOpen || isPhoneOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [isEmailOpen, isPhoneOpen]);
+
   return (
-    <div className="flex flex-col gap-10 ">
-      <div className="w-full h-14 flex items-center justify-between px-5 bg-dark-200 border border-dark-300 rounded-md">
+    <div id="contactInfo" className="w-full flex flex-col gap-10">
+      <div className="w-full h-14 flex items-center px-5 bg-dark-200 border border-dark-300 rounded-md">
         <h3 className="text-dark-500 text-xl font-medium">
           Contact information
         </h3>
@@ -32,13 +44,13 @@ export default function ContactInformation() {
         </AnimatePresence>
       ) : (
         <>
-          <div className="w-full grid grid-rows-3 gap-1 px-5">
+          <div className="w-full grid grid-rows-auto gap-3 md:gap-1 px-5 ">
             {/*EMAIL ROW*/}
-            <div className=" grid grid-cols-[200px_200px_1fr]">
+            <div className="grid grid-cols-2 md:grid-cols-[1fr_1fr_0.5fr] border-b md:border-none pb-3 md:pb-0">
               <span className="text-dark-400">Email</span>
               <span>{profile.email}</span>
               <button
-                className="place-self-end text-newPrimary text-sm font-medium"
+                className="text-newPrimary text-sm font-medium row-start-1 col-start-2 md:row-auto md:col-auto place-self-end"
                 onClick={() => setIsEmailOpen(!isEmailOpen)}
               >
                 Update
@@ -46,10 +58,10 @@ export default function ContactInformation() {
             </div>
 
             {/*PHONE ROW*/}
-            <div className="grid grid-cols-[200px_200px_1fr]">
+            <div className="grid grid-cols-2 md:grid-cols-[1fr_1fr_0.5fr] border-b md:border-none pb-3 md:pb-0">
               <span className="text-dark-400">Phone Number</span>
-              <span>{profile.user_phone}</span>
-              <button className="place-self-end text-newPrimary text-sm font-medium">
+              <span>{profile.user_phone || "-"}</span>
+              <button className=" text-newPrimary text-sm font-medium row-start-1 col-start-2 md:row-auto md:col-auto place-self-end ">
                 Update
               </button>
             </div>

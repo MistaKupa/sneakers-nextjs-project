@@ -17,7 +17,7 @@ export default function ProfileInformation({}) {
     : "";
 
   return (
-    <div className="flex flex-col">
+    <div id="profileInfo" className=" w-full flex flex-col">
       <div
         className={`w-full h-14 flex items-center justify-between px-5 bg-dark-200 border border-dark-300 ${
           isOpen ? "rounded-t-md" : "rounded-md"
@@ -61,7 +61,7 @@ export default function ProfileInformation({}) {
                 },
               }}
               exit={{ opacity: 0, maxHeight: 85 }}
-              className="w-full h-[400px] flex flex-col justify-center gap-5 items-center bg-dark-200 border-x border-b border-dark-300 px-56 overflow-hidden"
+              className="w-full h-[25rem] flex items-center justify-center gap-5 bg-dark-200 border-x border-b border-dark-300 overflow-hidden"
             >
               <ProfileInformationForm setIsOpen={setIsOpen} profile={profile} />
             </motion.div>
@@ -70,19 +70,19 @@ export default function ProfileInformation({}) {
               key="profileInfo"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="w-full h-20 grid grid-rows-2 gap-1 px-5 mt-10"
+              className="w-full h-20 grid grid-rows-2 gap-8 md:gap-1 px-5 mt-10"
             >
-              <div className="grid grid-cols-[200px_200px]">
+              <div className="grid grid-cols-2">
                 <span className="text-dark-400">Display name</span>
-                <span>{profile.display_name}</span>
+                <span>{profile.display_name || "-"}</span>
               </div>
-              <div className="grid grid-cols-[200px_200px]">
+              <div className="grid grid-cols-2">
                 <span className="text-dark-400">Gender</span>
-                <span>{profile.gender}</span>
+                <span>{profile.gender || "-"}</span>
               </div>
-              <div className="grid grid-cols-[200px_200px]">
+              <div className="grid grid-cols-2">
                 <span className="text-dark-400">Birth date</span>
-                <span>{formatedBirthDate}</span>
+                <span>{formatedBirthDate || "-"}</span>
               </div>
             </motion.div>
           )}

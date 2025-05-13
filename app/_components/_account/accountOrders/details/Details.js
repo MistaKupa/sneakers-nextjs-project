@@ -19,13 +19,13 @@ export default function Details({ orderItems, orderDetails }) {
   const orderDate = format(new Date(order_date), "dd/MM/yyyy");
 
   return (
-    <div className="w-[1040px] flex flex-col gap-20 justify-center border-2 rounded-md p-16">
+    <div className="max-w-[1040px] flex flex-col gap-20 justify-center border-2 rounded-md p-10 md:p-16">
       <p>
         Your order <span className="font-semibold"> </span>is being prepared.
       </p>
 
-      <div className="grid grid-cols-3 justify-between">
-        <div>
+      <div className="flex flex-col gap-10 md:grid md:grid-cols-3 justify-between px-5 md:p-0">
+        <div className="border-b-2 pb-5 md:border-b-0 md:pb-0">
           <h4 className="font-semibold mb-2">Delivery adress</h4>
           <div className="flex flex-col text-sm text-dark-400">
             <span>{customerName}</span>
@@ -35,7 +35,7 @@ export default function Details({ orderItems, orderDetails }) {
           </div>
         </div>
 
-        <div>
+        <div className="border-b-2 pb-5 md:border-b-0 md:pb-0">
           <h4 className="font-semibold mb-2">Facturation adress</h4>
           <div className="flex flex-col text-sm text-dark-400">
             <span>{customerName}</span>
@@ -45,7 +45,7 @@ export default function Details({ orderItems, orderDetails }) {
           </div>
         </div>
 
-        <div>
+        <div className="border-b-2 pb-5 md:border-b-0 md:pb-0">
           <h4 className="font-semibold mb-2">Order details</h4>
           <div className="flex flex-col gap-3">
             <div className="flex flex-col text-sm">

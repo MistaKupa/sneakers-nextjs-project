@@ -1,9 +1,12 @@
 import AccountMenu from "@/app/_components/_account/accountMenu/AccountMenu";
+import AccountSideBar from "@/app/_components/_account/accountSideBar/AccountSideBar";
+import OrdersLegend from "@/app/_components/_account/accountSideBar/ordersLegend/OrdersLegend";
+import UserDetails from "@/app/_components/_account/accountSideBar/userDetails/UserDetails";
 import Image from "next/image";
 
 export default function AccountLayout({ children }) {
   return (
-    <main>
+    <main className="w-full">
       <div className="w-full h-28">
         <div className="relative w-full h-full">
           <Image
@@ -14,9 +17,14 @@ export default function AccountLayout({ children }) {
           />
         </div>
       </div>
-      <section className="relative mx-auto py-14 flex items-center justify-center max-w-[1440px]">
+      <section className="relative mx-auto px-4 py-14 max-w-[1440px]">
         <AccountMenu />
-        {children}
+        <div className="w-full lg:grid lg:grid-cols-[1fr_2.5fr]">
+          <div className="hidden lg:block">
+            <AccountSideBar />
+          </div>
+          {children}
+        </div>
       </section>
     </main>
   );

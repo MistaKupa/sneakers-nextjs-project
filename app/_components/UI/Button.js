@@ -9,13 +9,14 @@ function Button({
   className,
   increment,
   decrement,
+  disabled,
 }) {
   const buttonStyles = {
     addToCart:
-      "flex items-center justify-center gap-3 w-full bg-newPrimary hover:bg-orangePale active:bg-orangePale py-4 rounded-xl transition-all duration-300",
+      "flex items-center justify-center gap-3 w-full bg-newPrimary hover:bg-newPrimaryHover active:bg-newPrimaryHover py-4 rounded-xl transition-all duration-300",
     quantity:
       "flex items-center justify-around bg-dark-200 w-full py-4 rounded-xl",
-    main: "flex items-center justify-center gap-3 w-full bg-newPrimary hover:bg-orangePale active:bg-orangePale py-4 rounded-xl transition-all duration-300",
+    main: "flex items-center justify-center gap-3 w-full bg-newPrimary hover:bg-newPrimaryHover active:bg-newPrimaryHover py-4 rounded-xl transition-all duration-300",
   };
 
   const icons = {
@@ -31,7 +32,15 @@ function Button({
   };
 
   return (
-    <button onClick={onClick} className={`${buttonStyles[type]}`}>
+    <button
+      onClick={onClick}
+      className={`${buttonStyles[type]} ${
+        disabled
+          ? "cursor-not-allowed opacity-75 hover:bg-newPrimary"
+          : "cursor-pointer"
+      }`}
+      disabled={disabled}
+    >
       {type === "addToCart" && (
         <>
           <span>{icons[type]}</span>

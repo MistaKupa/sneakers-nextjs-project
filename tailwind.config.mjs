@@ -20,6 +20,7 @@ module.exports = {
           100: "hsl(0, 0%, 100%)",
         },
         newPrimary: "#6363FF",
+        newPrimaryHover: "#8880ff",
         newWhite: "#F5F5F5",
         lightBox: "hsl(0, 0%, 0%)",
       },

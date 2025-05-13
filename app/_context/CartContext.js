@@ -13,40 +13,46 @@ function CartProvider({ children }) {
   }, 0);
   const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
 
-  function addToCart(product, quantity) {
+  function addToCart(product, quantity, selectedSize) {
     setCart((prevCart) => {
-      const isInCart = prevCart.find((item) => item.id === product.id);
+      const isInCart = prevCart.find(
+        (item) => item.id === product.id && item.selectedSize === selectedSize
+      );
 
       if (isInCart) {
         return prevCart.map((item) =>
-          item.id === product.id
+          item.id === product.id && item.selectedSize === selectedSize
             ? { ...item, quantity: item.quantity + quantity }
             : item
         );
       }
 
-      return [...prevCart, { ...product, quantity }];
+      return [...prevCart, { ...product, quantity, selectedSize }];
     });
   }
 
-  function removeFromCart(productId) {
+  function removeFromCart(productId, selectedSize) {
     setCart((prevCart) => {
-      if (!productId) return;
+      if (!productId && !selectedSize) return;
 
-      return prevCart.filter((item) => item.id !== productId);
+      return prevCart.filter(
+        (item) => !(item.id === productId && item.selectedSize === selectedSize)
+      );
     });
   }
 
-  function updateQuantity(productId, newQuantity) {
+  function updateQuantity(productId, newQuantity, selectedSize) {
     if (newQuantity === 0) {
       alert("Are you sure you want to remove product?");
-      removeFromCart(productId);
+      removeFromCart(productId, selectedSize);
     }
 
     if (newQuantity > 0 && newQuantity <= 10) {
       setCart((prevCart) =>
         prevCart.map((item) =>
-          item.id === productId ? { ...item, quantity: newQuantity } : item
+          item.id === productId && item.selectedSize === selectedSize
+            ? { ...item, quantity: newQuantity }
+            : item
         )
       );
     }

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import ContactInput from "./ContactInput";
 import { motion, AnimatePresence } from "motion/react";
+import { updateEmail } from "@/app/_lib/account-service";
 
 function ContactEmailForm({ profile, setIsEmailOpen }) {
   const { email } = profile;
@@ -11,6 +12,12 @@ function ContactEmailForm({ profile, setIsEmailOpen }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const success = await updateEmail(newEmail);
+
+    if (success) {
+      setIsEmailOpen(false);
+    }
   };
 
   const handleCancel = (e) => {
@@ -28,7 +35,7 @@ function ContactEmailForm({ profile, setIsEmailOpen }) {
         type: "spring",
         stiffness: 100,
       }}
-      className="max-w-96 flex flex-col gap-5 p-10 bg-dark-200 rounded-md shadow-xl"
+      className="min-w-[19rem] sm:w-[24rem] lg:w-[26rem] flex flex-col gap-5 p-5 sm:p-10 bg-dark-200 rounded-md shadow-xl"
     >
       <h3 className="text-3xl font-semibold">Login email</h3>
 
@@ -39,7 +46,10 @@ function ContactEmailForm({ profile, setIsEmailOpen }) {
         submitting this form.
       </p>
 
-      <form className="w-72 flex flex-col items-center justify-center gap-10">
+      <form
+        className="w-full flex flex-col items-center justify-center gap-10"
+        onSubmit={handleSubmit}
+      >
         <ContactInput
           inputId="email"
           label="Email"
@@ -57,7 +67,10 @@ function ContactEmailForm({ profile, setIsEmailOpen }) {
           >
             Cancel
           </button>
-          <button className="w-full h-10 rounded-md text-newWhite bg-newPrimary font-semibold">
+          <button
+            type="submit"
+            className="w-full h-10 rounded-md text-newWhite bg-newPrimary font-semibold"
+          >
             Save
           </button>
         </div>

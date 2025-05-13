@@ -18,18 +18,28 @@ export async function getMenProducts() {
 export async function getProduct(id) {
   const supabase = await createServerClientInstance();
 
-  const { data, error } = await supabase
+  const { data: product, error: productError } = await supabase
     .from("menSneakers")
     .select("*")
     .eq("id", id)
     .single();
 
-  if (error) {
-    console.error(error);
+  if (productError) {
+    console.error(productError);
     throw new Error("Product could not be loaded.");
   }
 
-  return data;
+  const { data: sneakerSizes, error: sizesError } = await supabase
+    .from("sneakers_sizes")
+    .select("size, quantity")
+    .eq("sneaker_id", id);
+
+  if (sizesError) {
+    console.error(sizesError);
+    throw new Error("Product sizes could not be loaded.");
+  }
+
+  return { product, sneakerSizes };
 }
 
 export async function getUserOrders(email) {

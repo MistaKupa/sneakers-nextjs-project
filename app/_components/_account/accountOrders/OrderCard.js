@@ -2,6 +2,15 @@ import Link from "next/link";
 import { IoEllipseSharp, IoEllipsisHorizontalSharp } from "react-icons/io5";
 import { format } from "date-fns";
 
+const statusColorMap = {
+  new: "text-green-500",
+  pending: "text-amber-500",
+  accepted: "text-blue-500",
+  packed: "text-gray-500",
+  sent: "text-black",
+  canceled: "text-red-500",
+};
+
 export default function OrderCard({ order }) {
   const {
     id,
@@ -13,9 +22,11 @@ export default function OrderCard({ order }) {
   const orderDate = format(new Date(order_date), "dd/MM/yyyy");
 
   return (
-    <div className="grid grid-cols-5 h-20 border-b items-center">
+    <div className="hidden lg:grid grid-cols-5 h-20 border-b items-center">
       <div className="flex items-center justify-start gap-2">
-        <IoEllipseSharp />
+        <IoEllipseSharp
+          className={statusColorMap[order.status] || "text-dark-500"}
+        />
         <Link href="" className="text-dark-500 font-bold hover:text-newPrimary">
           {id}
         </Link>
@@ -34,7 +45,6 @@ export default function OrderCard({ order }) {
         >
           Details
         </Link>
-        <IoEllipsisHorizontalSharp size={25} className="text-newPrimary" />
       </span>
     </div>
   );

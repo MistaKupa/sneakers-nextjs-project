@@ -7,14 +7,14 @@ function PasswordInput({ label, value, onChange, inputName }) {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="relative w-72 h-12">
+    <div className="relative w-full">
       <input
         name={inputName}
         type={`${showPassword ? "text" : "password"}`}
         placeholder={label}
         value={value}
         onChange={onChange}
-        className="w-72 h-12 border border-dark-300 rounded-md p-3 outline-newPrimary"
+        className="w-full border border-dark-300 rounded-md p-3 outline-newPrimary"
       />
       <button
         className="absolute top-[50%] translate-y-[-50%] right-3"

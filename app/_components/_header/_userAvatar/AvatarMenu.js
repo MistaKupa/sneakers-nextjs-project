@@ -6,14 +6,16 @@ import {
   IoPersonOutline,
 } from "react-icons/io5";
 import { TfiPackage } from "react-icons/tfi";
-import UserDetails from "../../_account/userDetails/UserDetails";
+import UserDetails from "../../_account/accountSideBar/userDetails/UserDetails";
 
-export default function UserAvatarPopup() {
+export default function AvatarMenu({}) {
   return (
     <div className="min-w-72 flex flex-col items-start gap-5 py-6 px-6 bg-dark-100 border shadow-sm text-dark-500 rounded-md z-50">
-      <Link href="">
-        <UserDetails />
-      </Link>
+      <div className="min-w-64 min-h-16">
+        <Link href="">
+          <UserDetails />
+        </Link>
+      </div>
 
       <span className="border-t w-full"></span>
       <div className="w-full flex flex-col items-start gap-4 mt-3 ">
@@ -63,7 +65,7 @@ export default function UserAvatarPopup() {
         >
           <Link
             className="flex gap-4 hover:text-newPrimary transition-all duration-200"
-            href="/api/auth/signout"
+            href="/logout"
           >
             <IoLogOutOutline size={23} />
             <span>Logout</span>

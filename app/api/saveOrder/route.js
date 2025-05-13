@@ -38,12 +38,13 @@ export async function POST(request) {
 
     const orderItems = order.products.map((item) => ({
       order_id: orderId,
+      customer_name: order.adress.name,
       product_id: item.productId,
       product_name: item.productName,
       product_image: item.productImage,
+      product_size: item.productSize,
       quantity: item.quantity,
       price_at_time: item.price,
-      customer_name: order.adress.name,
     }));
 
     console.log("NECHAPEM:", orderItems);

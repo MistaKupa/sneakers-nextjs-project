@@ -4,7 +4,7 @@ import { useCart } from "@/app/_context/CartContext";
 import Button from "../UI/Button";
 import { useState } from "react";
 
-function ProductButtons({ product }) {
+function ProductButtons({ product, selectedSize }) {
   const { addToCart } = useCart();
 
   const [quantity, setQuantity] = useState(1);
@@ -18,7 +18,7 @@ function ProductButtons({ product }) {
   }
 
   return (
-    <div className="grid grid-cols-[1.2fr,1fr,1fr] items-center justify-between gap-3 ">
+    <div className="flex flex-col gap-5 md:grid md:grid-cols-[1.2fr,1fr,1fr] items-center md:justify-between md:gap-3 ">
       <div className="col-span-1 flex items-center justify-center rounded-xl w-full">
         <Button
           type="quantity"
@@ -35,7 +35,8 @@ function ProductButtons({ product }) {
           type="addToCart"
           iconSize={25}
           className="text-newWhite"
-          onClick={() => addToCart(product, quantity)}
+          disabled={!selectedSize}
+          onClick={() => addToCart(product, quantity, selectedSize)}
         >
           <span className="font-bold text-newWhite ">Add to cart</span>
         </Button>

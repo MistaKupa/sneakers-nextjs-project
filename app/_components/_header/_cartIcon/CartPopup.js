@@ -1,8 +1,7 @@
+import { useCart } from "@/app/_context/CartContext";
 import Link from "next/link";
 import MiniProductCard from "../../_miniProductCard/MiniProductCard";
 import Button from "../../UI/Button";
-import { useCart } from "@/app/_context/CartContext";
-import Image from "next/image";
 import CartEmpty from "./CartEmpty";
 
 function CartPopup({ isOpen, openPopup, closePopup }) {
@@ -10,7 +9,7 @@ function CartPopup({ isOpen, openPopup, closePopup }) {
 
   return (
     <div
-      className={`absolute top-[100%] -right-36 min-w-96 m-0 rounded-xl flex items-center pt-5 z-10 ${
+      className={`absolute top-10 -right-4 md:-right-16 lg:-right-24 min-w-96 m-0 rounded-xl flex items-center pt-5 z-10 shadow-xl ${
         isOpen ? "block" : "hidden"
       }`}
       onMouseEnter={openPopup}

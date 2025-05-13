@@ -8,8 +8,8 @@ export default function LogoBlack() {
         <Image
           src="/images/logo_black.svg"
           alt="Sneakers Logo"
-          width={138}
-          height={20}
+          width={135}
+          height={50}
         />
       </Link>
     </div>

@@ -9,14 +9,14 @@ export default function ProfileInformationInput({
   return (
     <>
       {inputType === "select" ? (
-        <div className="relative w-72 h-12">
+        <div className="">
           <select
             name={inputName}
             type={type}
             placeholder={placeHolder}
             value={value}
             onChange={onChange}
-            className="w-72 h-12 border border-dark-300 rounded-md p-2 outline-newPrimary"
+            className="border border-dark-300 rounded-md p-2 outline-newPrimary w-full"
           >
             <option value="Male">Male</option>
             <option value="Female">Female</option>
@@ -24,14 +24,14 @@ export default function ProfileInformationInput({
           </select>
         </div>
       ) : (
-        <div className="relative w-72 h-12">
+        <div className="">
           <input
             name={inputName}
             type={type}
             placeholder={placeHolder}
             value={value}
             onChange={onChange}
-            className="w-72 h-12 border border-dark-300 rounded-md p-3 outline-newPrimary"
+            className="border border-dark-300 rounded-md p-2 outline-newPrimary w-full"
           />
         </div>
       )}

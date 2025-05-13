@@ -5,32 +5,39 @@ import CartDiscountInput from "./CartDiscountInput";
 import CartHeader from "./CartHeader";
 import CartProductCard from "./CartProductCard";
 import { useCart } from "@/app/_context/CartContext";
+import CartProductCardMobile from "./CartProductCardMobile";
 
 export default function CartSummary() {
   const { setCheckoutProgress } = useCart();
 
   return (
-    <div className=" max-w-[1440px]">
+    <div className="w-full p-5">
       <div className="my-7">
         <h2 className="text-3xl text-dark-500 font-bold">Your Cart</h2>
       </div>
 
       {/*Cart Header */}
-      <CartHeader />
+      <div className="hidden lg:block">
+        <CartHeader />
+      </div>
 
       {/*Cart Items */}
-      <div className="grid grid-rows-[auto] gap-5 border-b-2">
+      <div className="hidden lg:grid lg:grid-rows-[auto] lg:gap-5 lg:border-b-2">
         <CartProductCard />
       </div>
 
+      <div className="lg:hidden">
+        <CartProductCardMobile />
+      </div>
+
       {/*DISCOUNT + PROCEED CHECKOUT*/}
-      <div className="grid grid-cols-2 items-center justify-between mt-8">
+      <div className="flex flex-col items-center gap-10 md:grid md:grid-cols-2 md:items-center md:justify-between mt-8">
         <CartDiscountInput />
 
         {/*"BUTTON"*/}
         <div className="flex items-center justify-end">
           <button
-            className="bg-newPrimary px-10 py-4 rounded-md text-newWhite font-bold"
+            className="bg-newPrimary px-5 py-4 lg:px-10 lg:py-4 rounded-md text-newWhite font-bold"
             onClick={() => setCheckoutProgress("in-checkout")}
           >
             Proceed To Checkout

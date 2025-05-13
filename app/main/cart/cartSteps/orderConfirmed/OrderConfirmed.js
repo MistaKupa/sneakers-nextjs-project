@@ -8,7 +8,7 @@ import { useCart } from "@/app/_context/CartContext";
 
 export default function OrderConfirmed() {
   return (
-    <div className="flex flex-col items-center gap-10 my-10">
+    <div className="flex flex-col items-center gap-10 lg:my-10">
       <motion.div
         initial={{ opacity: 0, scale: 0, y: 500 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -39,7 +39,10 @@ export default function OrderConfirmed() {
           times: [0.4, 0.5, 0.6, 0.7, 0.8],
         }}
       >
-        <Lottie className="h-96 my-4" animationData={orderConfirmed}></Lottie>
+        <Lottie
+          className="h-52 lg:h-96 my-4"
+          animationData={orderConfirmed}
+        ></Lottie>
       </motion.div>
     </div>
   );

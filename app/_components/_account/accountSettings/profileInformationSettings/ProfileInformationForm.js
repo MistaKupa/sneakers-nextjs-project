@@ -13,8 +13,8 @@ export default function ProfileInformationForm({ setIsOpen, profile }) {
   const [newDisplayName, setNewDisplayName] = useState(
     displayName || newDisplayName
   );
-  const [newGender, setNewGender] = useState(gender || newGender);
-  const [newBirthDate, setNewBirthDate] = useState(birthDate || newBirthDate);
+  const [newGender, setNewGender] = useState(gender || "");
+  const [newBirthDate, setNewBirthDate] = useState(birthDate || "");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,10 +44,10 @@ export default function ProfileInformationForm({ setIsOpen, profile }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-72 flex flex-col items-center justify-center gap-3"
+      className="w-4/5 md:w-1/2 flex flex-col items-center gap-4 px-2 lg:gap-3"
     >
       {/*DisplayName Input*/}
-      <div className="relative">
+      <div className="relative w-full">
         <ProfileInformationInput
           inputName="Display name"
           type="text"
@@ -61,7 +61,7 @@ export default function ProfileInformationForm({ setIsOpen, profile }) {
       </div>
 
       {/*Gender Input*/}
-      <div className="relative">
+      <div className="relative w-full">
         <ProfileInformationInput
           inputName="Display name"
           inputType="select"
@@ -76,7 +76,7 @@ export default function ProfileInformationForm({ setIsOpen, profile }) {
       </div>
 
       {/*BirthDate Input*/}
-      <div className="relative">
+      <div className="relative w-full">
         <ProfileInformationInput
           inputName="Birth Date"
           type="date"
@@ -90,7 +90,7 @@ export default function ProfileInformationForm({ setIsOpen, profile }) {
       </div>
 
       {/*Form Buttons */}
-      <div className="flex items-center gap-3 w-full">
+      <div className="flex items-center gap-3 w-full md:px-0">
         <div className="w-full">
           <button
             onClick={handleCancelForm}

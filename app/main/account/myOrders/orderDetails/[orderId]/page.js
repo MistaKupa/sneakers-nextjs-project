@@ -15,7 +15,7 @@ export default async function OrderDetails({ params }) {
   }
 
   return (
-    <div>
+    <div className="flex flex-col gap-10">
       <div className="flex items-center gap-10">
         <Link
           href="/main/account/myOrders"

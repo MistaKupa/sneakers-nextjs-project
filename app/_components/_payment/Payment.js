@@ -16,7 +16,7 @@ export default function Payment() {
     }, 10) * 100;
 
   return (
-    <div className="w-96 h-full flex items-center justify-center ">
+    <div className="w-96 h-full flex items-center justify-center">
       <Elements
         stripe={stripe}
         options={{

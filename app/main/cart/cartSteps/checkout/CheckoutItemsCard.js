@@ -27,9 +27,9 @@ export default function CheckoutItemsCard() {
           <motion.div
             key={item.id}
             variants={childVariants}
-            className="w-full flex items-center justify-around gap-1 text-newWhite "
+            className="w-full flex items-center justify-around gap-5 md:gap-1 md:px-10 text-newWhite "
           >
-            <div className="min-h-[100px] min-w-[100px]">
+            <div className="min-h-[80px] min-w-[80px] lg:min-h-[100px] lg:min-w-[100px]">
               <Image
                 src={item.images[0]}
                 alt="Product image"
@@ -39,14 +39,15 @@ export default function CheckoutItemsCard() {
                 className="rounded-md"
               />
             </div>
-            <div className="w-36 flex flex-col justify-center gap-2">
+            <div className="w-36 flex flex-col justify-center gap-2 text-sm lg:text-base">
               <h3 className="font-bold ">{item.title}</h3>
               <div className="flex items-center gap-2">
-                <span className="font-bold text-xl">
+                <span className="font-bold text-lg lg:text-xl">
                   €{item.price.toFixed(2)}
                 </span>
                 <span className="font-light"> x {item.quantity}</span>
               </div>
+              <div className="text-sm">Size: {item.selectedSize}</div>
             </div>
           </motion.div>
         );

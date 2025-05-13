@@ -8,7 +8,7 @@ import CheckoutSummary from "./CheckoutSummary";
 export default function Checkout() {
   return (
     <div
-      className="w-[1440px] my-10 grid grid-cols-2 justify-center items-center"
+      className="w-full flex flex-col gap-20 mb-8 lg:my-10 lg:grid lg:grid-cols-2 lg:justify-center lg:items-center lg:p-5"
       key="checkoutWrapper"
     >
       <CheckoutSummary />

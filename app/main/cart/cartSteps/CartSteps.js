@@ -24,9 +24,9 @@ export default function CartSteps() {
   const { checkoutProgress, cart } = useCart();
 
   return (
-    <>
+    <section className="max-w-[1440px] mx-auto ">
       {(cart.length > 0 || checkoutProgress === "order-confirmed") && (
-        <div className="relative w-1/2 h-3 bg-gray-200 my-10  rounded-md">
+        <div className="relative w-2/3 lg:w-full h-3 bg-gray-200 my-20 rounded-md max-w-xl mx-auto px-4">
           <div className="absolute top-0 left-0 w-full h-full flex items-center justify-between rounded-md">
             <motion.span
               initial={{ width: 0 }}
@@ -123,6 +123,6 @@ export default function CartSteps() {
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </section>
   );
 }

@@ -8,7 +8,7 @@ export default function PasswordSettings({}) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex flex-col">
+    <div id="password" className="w-full flex flex-col">
       <div
         className={`w-full h-14 flex items-center justify-between px-5 bg-dark-200 border border-dark-300 ${
           isOpen ? "rounded-t-md" : "rounded-md"
@@ -32,13 +32,13 @@ export default function PasswordSettings({}) {
             stiffness: 300,
             damping: 50,
           }}
-          className="w-full h-[470px] flex flex-col justify-center gap-5 items-center bg-dark-200 border-x border-b border-dark-300 px-56 overflow-hidden"
+          className="w-full h-[470px] flex flex-col items-center justify-center gap-5 bg-dark-200 border-x border-b border-dark-300 overflow-hidden"
         >
           <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.25 }}
-            className="text-dark-400 w-full "
+            className="flex justify-center text-dark-400 w-full px-5 text-wrap"
           >
             We recommend that the password contains uppercase letters, lowercase
             letters, and numbers.
@@ -51,6 +51,7 @@ export default function PasswordSettings({}) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.25 }}
+            className="w-full flex justify-center"
           >
             <PasswordForm setIsOpen={setIsOpen} />
           </motion.div>
