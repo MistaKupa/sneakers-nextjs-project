@@ -4,11 +4,23 @@ import { AnimatePresence, motion } from "motion/react";
 
 import Image from "next/image";
 import LightbulbModal from "../_lightbulb/LightbulbModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function ProductImage({ product }) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [isOpen]);
 
   return (
     <>
@@ -55,6 +67,7 @@ function ProductImage({ product }) {
           ))}
         </div>
       </div>
+
       {/* LIGHTBULB IMAGE MODAL */}
       <AnimatePresence mode="wait">
         {isOpen && (
@@ -63,13 +76,13 @@ function ProductImage({ product }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.6 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-5 bg-lightBox"
+              className="fixed inset-0 z-10 bg-lightBox"
             ></motion.div>
             <motion.div
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0 }}
-              className="fixed top-[50%] left-[50%]"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed top-[50%] left-[50%] z-20"
             >
               <LightbulbModal
                 productImages={product.images}

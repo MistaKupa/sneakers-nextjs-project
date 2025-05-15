@@ -1,15 +1,19 @@
 import { createServerClientInstance } from "@/utils/supabase/server";
 
-export async function getMenProducts() {
+export async function getProducts(gender) {
   const supabase = await createServerClientInstance();
 
   const { data, error } = await supabase
-    .from("menSneakers")
-    .select("id, title, description, price, discount, details, images");
+    .from("sneakers")
+    .select("id, title, description, price, discount, details, images")
+    .eq("category", gender);
+
+  console.log("Fetched products:", data);
+  console.log("Error:", error);
 
   if (error) {
     console.error(error);
-    throw new Error("Men products could not be loaded.");
+    throw new Error("Products could not be loaded.");
   }
 
   return data;
@@ -19,14 +23,14 @@ export async function getProduct(id) {
   const supabase = await createServerClientInstance();
 
   const { data: product, error: productError } = await supabase
-    .from("menSneakers")
+    .from("sneakers")
     .select("*")
     .eq("id", id)
     .single();
 
-  if (productError) {
-    console.error(productError);
-    throw new Error("Product could not be loaded.");
+  if (productError || !product) {
+    console.error("Product fetch failed:", productError);
+    return null;
   }
 
   const { data: sneakerSizes, error: sizesError } = await supabase
@@ -35,8 +39,8 @@ export async function getProduct(id) {
     .eq("sneaker_id", id);
 
   if (sizesError) {
-    console.error(sizesError);
-    throw new Error("Product sizes could not be loaded.");
+    console.error("Sizes fetch failed:", sizesError);
+    return null;
   }
 
   return { product, sneakerSizes };

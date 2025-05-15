@@ -1,15 +1,5 @@
-import ProductImage from "../../../_components/_productDetails/ProductImage";
-import ProductDescription from "../../../_components/_productDetails/ProductDetails";
+import ProductListingPage from "@/app/_components/_products/ProductsListingPage";
 
-function page() {
-  return (
-    <section className="relative h-full mx-auto mt-24 flex items-center justify-center">
-      <div className="grid grid-cols-2 justify-between items-center gap-20 px-24">
-        <ProductImage />
-        <ProductDescription />
-      </div>
-    </section>
-  );
+export default function Men({ searchParams }) {
+  return <ProductListingPage gender="men" searchParams={searchParams} />;
 }
-
-export default page;

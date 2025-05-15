@@ -48,17 +48,18 @@ function LightbulbModal({
     <>
       <div
         ref={modalRef}
-        className="w-[650px] fixed top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] flex flex-col gap-5"
+        className="w-11/12 md:w-3/4 lg:w-2/4 xl:w-1/3 xl:h-1/3 fixed top-48 md:top-14 left-[50%] translate-x-[-50%] flex flex-col gap-5"
       >
         <motion.button
           whileHover={{ scale: 1.3 }}
+          transition={{ duration: 0.15 }}
           className="place-self-end text-newWhite hover:text-dark-300 transition-all duration-300"
           onClick={() => setIsOpen(false)}
         >
           <IoCloseSharp size={25} />
         </motion.button>
         {/*MAIN IMAGE CONTAINER*/}
-        <div className="relative rounded-lg w-full ">
+        <div className="relative rounded-lg w-full">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeIndex}
@@ -81,14 +82,14 @@ function LightbulbModal({
           {/*NAVIGATION BUTTONS*/}
           <button
             onClick={prevImage}
-            className="absolute top-[50%] translate-y-[-50%] -left-6 bg-dark-100 rounded-full p-3 text-dark-500 hover:text-newPrimary"
+            className="absolute top-[50%] translate-y-[-50%] -left-2.5 md:-left-6 bg-dark-100 rounded-full p-0.5 md:p-3 text-dark-500 hover:text-newPrimary"
           >
             <IoChevronBack size={25} className="" />
           </button>
 
           <button
             onClick={nextImage}
-            className="absolute top-[50%] translate-y-[-50%] -right-6 bg-dark-100 rounded-full p-3 text-dark-500 hover:text-newPrimary"
+            className="absolute top-[50%] translate-y-[-50%] -right-2.5 md:-right-6 bg-dark-100 rounded-full p-0.5 md:p-3 text-dark-500 hover:text-newPrimary"
           >
             <IoChevronForward size={25} className="" />
           </button>
@@ -98,7 +99,7 @@ function LightbulbModal({
           {productImages.map((productImage, i) => (
             <div
               key={i}
-              className={`w-28 flex items-center justify-center cursor-pointer rounded-lg ${
+              className={`max-w-36 flex items-center justify-center cursor-pointer rounded-lg ${
                 activeIndex === i
                   ? "border-2 border-newPrimary"
                   : "border border-transparent"

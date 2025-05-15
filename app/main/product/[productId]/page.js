@@ -1,10 +1,18 @@
 import ProductDescription from "@/app/_components/_productDetails/ProductDetails";
 import ProductImage from "@/app/_components/_productDetails/ProductImage";
 import { getProduct } from "@/app/_lib/data-service";
+import { notFound } from "next/navigation";
 
 export default async function Page({ params }) {
   const routeParams = await params;
-  const { product, sneakerSizes } = await getProduct(routeParams.productId);
+
+  const productData = await getProduct(routeParams.productId);
+
+  if (!productData) {
+    return notFound();
+  }
+
+  const { product, sneakerSizes } = productData;
 
   const { images } = product;
 

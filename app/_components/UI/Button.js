@@ -1,64 +1,46 @@
-import { IoAdd, IoCartOutline, IoRemove } from "react-icons/io5";
+"use client";
+import { cn } from "@/app/_lib/utils";
+import { Loader2 } from "lucide-react";
 
-function Button({
-  onClick,
+export default function Button({
   children,
-  type,
-  iconSize,
-  iconColor,
-  className,
-  increment,
-  decrement,
-  disabled,
+  onClick,
+  variant = "primary",
+  disabled = false,
+  loading = false,
+  icon: Icon,
+  iconPosition = "left",
+  className = "",
+  ...props
 }) {
-  const buttonStyles = {
-    addToCart:
-      "flex items-center justify-center gap-3 w-full bg-newPrimary hover:bg-newPrimaryHover active:bg-newPrimaryHover py-4 rounded-xl transition-all duration-300",
-    quantity:
-      "flex items-center justify-around bg-dark-200 w-full py-4 rounded-xl",
-    main: "flex items-center justify-center gap-3 w-full bg-newPrimary hover:bg-newPrimaryHover active:bg-newPrimaryHover py-4 rounded-xl transition-all duration-300",
+  const baseStyles =
+    "w-full flex items-center justify-center gap-2 rounded-xl px-4 py-2 font-bold transition-all duration-200 focus:outline-none";
+
+  const variants = {
+    primary: "bg-newPrimary text-white hover:bg-opacity-80",
+    secondary: "bg-gray-200 text-dark-500 hover:bg-gray-300",
+    ghost: "bg-transparent text-dark-500 hover:text-newPrimary",
+    quantity: "text-newPrimary",
   };
 
-  const icons = {
-    addToCart: (
-      <IoCartOutline size={iconSize} className={className} color={iconColor} />
-    ),
-    increment: (
-      <IoAdd size={iconSize} className={className} color={iconColor} />
-    ),
-    decrement: (
-      <IoRemove size={iconSize} className={className} color={iconColor} />
-    ),
-  };
+  const finalClass = cn(
+    baseStyles,
+    variants[variant],
+    disabled && "opacity-50 cursor-not-allowed",
+    className
+  );
 
   return (
     <button
+      className={finalClass}
       onClick={onClick}
-      className={`${buttonStyles[type]} ${
-        disabled
-          ? "cursor-not-allowed opacity-75 hover:bg-newPrimary"
-          : "cursor-pointer"
-      }`}
-      disabled={disabled}
+      disabled={disabled || loading}
+      {...props}
     >
-      {type === "addToCart" && (
-        <>
-          <span>{icons[type]}</span>
-          {children}
-        </>
-      )}
-
-      {type === "quantity" && (
-        <>
-          <span onClick={decrement}>{icons.decrement}</span>
-          {children}
-          <span onClick={increment}>{icons.increment}</span>
-        </>
-      )}
-
-      {type === "main" && <>{children}</>}
+      {loading && <Loader2 className="animate-spin" size={20} />}
+      {!loading && Icon && iconPosition === "left" && <Icon size={20} />}
+      {children}
+      {!loading && Icon && iconPosition === "right" && <Icon size={20} />}
     </button>
   );
 }
-
-export default Button;

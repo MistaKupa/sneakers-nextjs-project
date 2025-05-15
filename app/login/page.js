@@ -7,7 +7,7 @@ import Link from "next/link";
 
 import { motion } from "motion/react";
 import { useState } from "react";
-import { login } from "./actions";
+import { login, loginWithGoogle } from "./actions";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -137,7 +137,7 @@ export default function Login() {
                 Sign in
               </motion.button>
             </form>
-            <motion.button
+            {/* <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 1 }}
               onClick={() => signIn("google")}
@@ -150,7 +150,7 @@ export default function Login() {
                 width={25}
                 height={25}
               />
-            </motion.button>
+            </motion.button> */}
           </div>
 
           <div className="w-full h-14 rounded-b-lg flex items-center justify-center gap-1 bg-dark-200 text-sm">

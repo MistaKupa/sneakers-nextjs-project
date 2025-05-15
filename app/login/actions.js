@@ -24,3 +24,21 @@ export async function login(formData) {
   revalidatePath("/", "layout");
   redirect("/");
 }
+
+export async function loginWithGoogle() {
+  const supabase = await createServerClientInstance();
+
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}`,
+    },
+  });
+
+  if (error) {
+    return {
+      error:
+        "Could not log in via Google. Try again or try a different method.",
+    };
+  }
+}
