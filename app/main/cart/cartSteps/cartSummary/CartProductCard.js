@@ -24,7 +24,7 @@ export default function CartProductCard() {
           >
             <div className="flex items-center gap-10 col-span-2">
               <div className="rounded-md">
-                <Link href={`/product/${product.id}`}>
+                <Link href={`/main/product/${product.id}`}>
                   <Image
                     src={product.images[0]}
                     alt={`${product.title} thumbnail`}

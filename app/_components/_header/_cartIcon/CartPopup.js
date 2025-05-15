@@ -9,7 +9,7 @@ function CartPopup({ isOpen, openPopup, closePopup }) {
 
   return (
     <div
-      className={`absolute top-10 -right-4 md:-right-16 lg:-right-24 min-w-96 m-0 rounded-xl flex items-center pt-5 z-10 shadow-xl ${
+      className={`absolute top-10 -right-4 md:-right-16 lg:-right-24 min-w-96 m-0 rounded-xl flex items-center pt-5  shadow-xl z-20 ${
         isOpen ? "block" : "hidden"
       }`}
       onMouseEnter={openPopup}
@@ -30,14 +30,14 @@ function CartPopup({ isOpen, openPopup, closePopup }) {
 
             <div className="flex items-center justify-center px-6 mb-8 w-full">
               <Link className="w-full " href="/main/cart">
-                <Button
+                {/* <Button
                   onClick={() => setCheckoutProgress("in-cart")}
-                  type="main"
+                  type="primary"
                 >
                   <span className="font-bold text-lg text-newWhite">
                     Order Now
                   </span>
-                </Button>
+                </Button> */}
               </Link>
             </div>
           </>

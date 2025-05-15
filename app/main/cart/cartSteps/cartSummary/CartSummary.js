@@ -31,11 +31,11 @@ export default function CartSummary() {
       </div>
 
       {/*DISCOUNT + PROCEED CHECKOUT*/}
-      <div className="flex flex-col items-center gap-10 md:grid md:grid-cols-2 md:items-center md:justify-between mt-8">
-        <CartDiscountInput />
+      <div className="flex flex-col items-center gap-10 md:items-end mt-8">
+        {/* <CartDiscountInput /> */}
 
         {/*"BUTTON"*/}
-        <div className="flex items-center justify-end">
+        <div className="flex justify-end">
           <button
             className="bg-newPrimary px-5 py-4 lg:px-10 lg:py-4 rounded-md text-newWhite font-bold"
             onClick={() => setCheckoutProgress("in-checkout")}

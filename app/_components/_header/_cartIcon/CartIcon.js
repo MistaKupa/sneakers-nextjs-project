@@ -28,7 +28,11 @@ function Cart() {
     >
       <div className="relative flex items-center justify-center">
         <Link className="flex items-center justify-center" href="/main/cart">
-          <button onClick={() => setCheckoutProgress("in-cart")}>
+          <button
+            onClick={() => setCheckoutProgress("in-cart")}
+            onMouseEnter={openPopup}
+            onMouseLeave={closePopup}
+          >
             <IoCartOutline className="text-dark-500 size-5 sm:size-7" />
           </button>
         </Link>

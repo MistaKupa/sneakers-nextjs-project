@@ -1,6 +1,7 @@
 import Details from "@/app/_components/_account/accountOrders/details/Details";
 import { getOrderDetails } from "@/app/_lib/data-service";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { IoArrowBack } from "react-icons/io5";
 
 export default async function OrderDetails({ params }) {
@@ -11,7 +12,7 @@ export default async function OrderDetails({ params }) {
 
   if (!orderItems && !orderDetails) {
     console.error("Order not found!");
-    return;
+    return notFound();
   }
 
   return (
