@@ -24,19 +24,22 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
 
   const onSubmit = async (data) => {
+  if (typeof window !== "undefined") {
     localStorage.setItem("displayName", data.displayName);
-    const result = await signUpUser(data);
+  }
 
-    if (!result.success) {
-      console.error(result.error);
-      reset();
-      return;
-    }
+  const result = await signUpUser(data);
 
-    setEmail(data.email);
-    setVerify(true);
+  if (!result.success) {
+    console.error(result.error);
     reset();
-  };
+    return;
+  }
+
+  setEmail(data.email);
+  setVerify(true);
+  reset();
+};
 
   return (
     <section className="relative h-screen overflow-hidden">
