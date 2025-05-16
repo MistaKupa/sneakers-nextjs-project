@@ -6,9 +6,9 @@ import { motion } from "motion/react";
 import { useForm } from "react-hook-form";
 import { signUpUser } from "../_lib/account-service";
 import { useState } from "react";
-import Lottie from "lottie-react";
-import emailVerify from "@/public/email-verify.json";
+
 import { IoArrowForward } from "react-icons/io5";
+import VerifyAccount from "../_components/verifyAccount/VerifyAccount";
 
 export default function SignUp() {
   const {
@@ -24,19 +24,22 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
 
   const onSubmit = async (data) => {
-    
-  const result = await signUpUser(data);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("displayName", data.displayName);
+    }
 
-  if (!result.success) {
-    console.error(result.error);
+    const result = await signUpUser(data);
+
+    if (!result.success) {
+      console.error(result.error);
+      reset();
+      return;
+    }
+
+    setEmail(data.email);
+    setVerify(true);
     reset();
-    return;
-  }
-
-  setEmail(data.email);
-  setVerify(true);
-  reset();
-};
+  };
 
   return (
     <section className="relative h-screen overflow-hidden">
@@ -85,36 +88,7 @@ export default function SignUp() {
           className="bg-dark-100  w-7/8 md:w-[33rem] md:h-[40rem] flex flex-col justify-between shadow-xl drop-shadow-2xl rounded-lg pt-14 px-1 pb-1"
         >
           {verify ? (
-            <div className="flex flex-col items-center justify-center gap-5">
-              <div className="text-center">
-                <Lottie
-                  className="h-40"
-                  animationData={emailVerify}
-                  loop={false}
-                ></Lottie>
-                <h3 className="text-4xl font-semibold">
-                  Verify your email address
-                </h3>
-              </div>
-
-              <p>
-                We have sent a verification link to{" "}
-                <span className="font-semibold">{email}</span>.
-              </p>
-              <div className="text-center">
-                <p>Click on the link to complete the verification process.</p>
-                <p>
-                  You might need to{" "}
-                  <span className="font-semibold">check your spam folder</span>.
-                </p>
-              </div>
-              <Link
-                href="/"
-                className="flex items-center gap-2 text-newPrimary font-semibold mt-10"
-              >
-                Return to site <IoArrowForward />
-              </Link>
-            </div>
+            <VerifyAccount />
           ) : (
             <>
               <div className="flex flex-col gap-8 px-14">
