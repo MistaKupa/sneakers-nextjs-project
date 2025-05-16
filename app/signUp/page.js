@@ -24,10 +24,7 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
 
   const onSubmit = async (data) => {
-  if (typeof window !== "undefined") {
-    localStorage.setItem("displayName", data.displayName);
-  }
-
+    
   const result = await signUpUser(data);
 
   if (!result.success) {
