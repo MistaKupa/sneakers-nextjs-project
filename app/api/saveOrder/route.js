@@ -47,8 +47,6 @@ export async function POST(request) {
       price_at_time: item.price,
     }));
 
-    console.log("NECHAPEM:", orderItems);
-
     const { data: orderItemsData, error: orderItemsError } = await supabase
       .from("order_items")
       .insert(orderItems);

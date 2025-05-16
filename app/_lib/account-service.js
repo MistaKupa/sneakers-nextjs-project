@@ -62,8 +62,6 @@ export async function updateProfileInfo(
     const supabase = createClientInstance();
     const { data: user, error: userError } = await supabase.auth.getUser();
 
-    console.log(user);
-
     if (!user || userError) {
       console.error(userError);
     }
@@ -99,8 +97,6 @@ export async function updateEmail(newEmail) {
     });
 
     const result = await response.json();
-
-    console.log(result);
 
     if (!result.success) {
       toast.error(result.error);

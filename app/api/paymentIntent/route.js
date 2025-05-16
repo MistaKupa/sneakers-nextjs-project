@@ -9,8 +9,6 @@ export async function POST(request) {
 
     const { amount, cart, currency } = res;
 
-    console.log("CURRENCY:", currency);
-
     const paymentIntent = await stripe.paymentIntents.create({
       amount,
       currency,

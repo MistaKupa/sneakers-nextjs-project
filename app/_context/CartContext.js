@@ -1,12 +1,30 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const CartContext = createContext();
 
 function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
   const [checkoutProgress, setCheckoutProgress] = useState("");
+
+  // Load cart from localStorage on first load
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      try {
+        setCart(JSON.parse(storedCart));
+      } catch (err) {
+        console.error("Failed to parse cart from localStorage:", err);
+        localStorage.removeItem("cart");
+      }
+    }
+  }, []);
+
+  // Save cart to localStorage every time it changes
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   const totalCartPrice = cart.reduce((acc, item) => {
     return acc + item.price * item.quantity;

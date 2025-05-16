@@ -8,9 +8,6 @@ export async function getProducts(gender) {
     .select("id, title, description, price, discount, details, images")
     .eq("category", gender);
 
-  console.log("Fetched products:", data);
-  console.log("Error:", error);
-
   if (error) {
     console.error(error);
     throw new Error("Products could not be loaded.");
@@ -79,8 +76,6 @@ export async function getOrderDetails(orderId) {
     console.error(orderItemsError);
     throw new Error("Order items could not be loaded");
   }
-
-  console.log(orderItems);
 
   let { data: orderDetails, error: detailsError } = await supabase
     .from("orders")

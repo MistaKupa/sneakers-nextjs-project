@@ -74,8 +74,6 @@ export default function PaymentForm({ totalPrice }) {
     //   })),
     // });
 
-    console.log("Payment Intent Data:", data);
-
     if (data?.error) {
       setErrorMessage(data.error);
       setIsLoading(false);
@@ -93,13 +91,11 @@ export default function PaymentForm({ totalPrice }) {
         },
       });
       if (error) {
-        console.log(" I AM AT FIFTH IF");
         setErrorMessage(error.message);
         setIsLoading(false);
         return;
       } else {
         setIsLoading(false);
-        console.log(" ORDER CONFIRMED");
       }
       if (paymentIntent.status === "succeeded") {
         const response = await fetch("/api/saveOrder", {
